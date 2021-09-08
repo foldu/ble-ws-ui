@@ -1,0 +1,10 @@
+.overview-edit-label {
+    border-style: solid;
+    border-bottom-width: 1px;
+    padding-bottom: 1px;
+    border-color: @theme_selected_bg_color;
+}
+
+.ble-ws-graph {
+    color: @theme_fg_color;
+}

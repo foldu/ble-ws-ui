@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="schema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema" ?>
+<interface>
+  <template class="BleWsSensorRow" parent="AdwBin">
+    <property name="margin-top">10</property>
+    <property name="margin-bottom">10</property>
+    <property name="margin-start">10</property>
+    <property name="margin-end">10</property>
+    <property name="halign">center</property>
+    <child>
+      <object class="GtkGrid">
+        <property name="column-spacing">10</property>
+        <property name="row-spacing">10</property>
+        <child>
+          <object class="GtkEditableLabel" id="sensor_label">
+            <property name="tooltip-text">Change label</property>
+            <style>
+              <class name="overview-edit-label" />
+            </style>
+            <layout>
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="sensor_id">
+            <property name="tooltip-text">Sensor unique id</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="forget_button">
+            <property name="halign">end</property>
+            <property name="valign">center</property>
+            <property name="icon-name">user-trash-symbolic</property>
+            <property name="tooltip-text">Forget sensor</property>
+            <layout>
+              <property name="column">2</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="info_stack">
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">connected</property>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="temperature">
+                        <property name="halign">start</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="humidity">
+                        <property name="halign">start</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="pressure">
+                        <property name="halign">start</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">disconnected</property>
+                <property name="child">
+                  <object class="GtkBox">
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">dialog-warning-symbolic</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">Sensor disconnected</property>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <layout>
+              <property name="column">0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="detail_button">
+            <!-- <property name="icon-name">zoom-in-symbolic</property>-->
+            <property name="label">Show detailed history</property>
+            <property name="halign">end</property>
+            <property name="valign">start</property>
+            <layout>
+              <property name="column">1</property>
+              <property name="column-span">2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

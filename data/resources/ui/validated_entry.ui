@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="schema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema" ?>
+<interface>
+  <template class="BleWsValidatedEntry" parent="AdwBin">
+    <child>
+      <object class="GtkCenterBox">
+        <property name="orientation">vertical</property>
+        <child type="center">
+          <object class="GtkEntry" id="entry" />
+        </child>
+        <child type="end">
+          <object class="GtkRevealer" id="msg_revealer">
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkImage" id="icon" />
+                </child>
+                <child>
+                  <object class="GtkLabel" id="msg" />
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

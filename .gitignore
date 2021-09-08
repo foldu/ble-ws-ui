@@ -1,0 +1,12 @@
+/target
+result
+.direnv
+_build/
+builddir/
+build-aux/app
+build-aux/.flatpak-builder/
+*.ui.in~
+*.ui~
+.flatpak/
+/data/schemas/gschemas.compiled
+token

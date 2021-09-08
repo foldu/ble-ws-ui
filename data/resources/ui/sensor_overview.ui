@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="schema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema" ?>
+<interface>
+  <template class="BleWsSensorOverview" parent="AdwBin">
+    <child>
+      <object class="AdwLeaflet" id="leaflet">
+        <child>
+          <object class="AdwLeafletPage">
+            <property name="name">sensor_list</property>
+            <property name="child">
+              <object class="GtkScrolledWindow" id="scrolled_window">
+                <property name="propagate-natural-width">true</property>
+                <child>
+                  <object class="GtkListView" id="list_view">
+                    <property name="show-separators">true</property>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwLeafletPage">
+            <property name="name">detail</property>
+            <property name="child">
+              <object class="GtkStack" id="pane_stack">
+                <property name="hexpand">true</property>
+                <child>
+                  <object class="AdwStatusPage" id="status_page">
+                    <property name="description">Select a sensor on the right to show daily overview</property>
+                    <property name="title">No sensor selected</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="BleWsSensorOverviewDetail" id="overview_detail"></object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

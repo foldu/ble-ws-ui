@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="schema.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema" ?>
+<interface>
+  <template class="BleWsSensorOverviewDetail" parent="GtkBox">
+    <property name="spacing">10</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkLabel" id="sensor_label"></object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="homogeneous">true</property>
+        <property name="vexpand">true</property>
+        <child>
+          <object class="BleWsGraph" id="temperature_graph">
+          </object>
+        </child>
+        <child>
+          <object class="BleWsGraph" id="humidity_graph">
+          </object>
+        </child>
+        <child>
+          <object class="BleWsGraph" id="pressure_graph">
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

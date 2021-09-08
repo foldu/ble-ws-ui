@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/li/_5kw/BleWsGtk/">
+        <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">ui/window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="sensor_row.ui">ui/sensor_row.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="sensor_overview.ui">ui/sensor_overview.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="sensor_detail.ui">ui/sensor_detail.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="preferences_window.ui">ui/preferences_window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="validated_entry.ui">ui/validated_entry.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="shortcuts.ui">ui/shortcuts.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="graph.ui">ui/graph.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="sensor_overview_detail.ui">ui/sensor_overview_detail.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="time_date_picker.ui">ui/time_date_picker.ui</file>
+        <file compressed="true" alias="style.css">style.css</file>
+    </gresource>
+    <gresource prefix="/li/_5kw/BleWsGtk/icons/scalable/">
+        <file compressed="true" preprocess="xml-stripblanks" alias="temperature.svg">icons/thermometer.svg</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="pressure.svg">icons/barometer.svg</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="humidity.svg">icons/droplet.svg</file>
+    </gresource>
+</gresources>

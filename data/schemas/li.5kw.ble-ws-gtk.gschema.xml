@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist>
+  <schema path="/li/_5kw/BleWsGtk/" id="li._5kw.BleWsGtk">
+    <key name="last-window-state" type="(iib)">
+      <default>(-1,-1,false)</default>
+      <summary>Last window state</summary>
+      <description>Last window state, saved on every normal app quit</description>
+    </key>
+    <key name="dark-theme" type="b">
+      <default>false</default>
+      <summary>Use dark theme</summary>
+      <description>Use dark theme</description>
+    </key>
+    <key name="endpoint" type="s">
+      <default>''</default>
+      <summary>Use dark theme</summary>
+      <description>Use dark theme</description>
+    </key>
+  </schema>
+</schemalist>
