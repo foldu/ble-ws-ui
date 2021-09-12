@@ -1,4 +1,4 @@
-use super::{graph::Data, SensorDetail, SensorOverview};
+use super::{SensorDetail, SensorOverview};
 use crate::{
     data::Timeseries,
     event_loop::{Event, View},
@@ -7,8 +7,6 @@ use adw::subclass::prelude::*;
 use gtk::{prelude::*, CompositeTemplate};
 
 mod imp {
-    use std::cell::Cell;
-
     use super::*;
     use glib::signal::Inhibit;
     use gtk::subclass::prelude::*;

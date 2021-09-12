@@ -21,7 +21,7 @@ mod imp {
     use glib::ParamFlags;
     use gtk::{subclass::prelude::*, CompositeTemplate, Inhibit};
     use once_cell::sync::Lazy;
-    use std::cell::{Cell, RefCell};
+    use std::cell::Cell;
 
     #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/li/_5kw/BleWsGtk/time_date_picker.ui")]

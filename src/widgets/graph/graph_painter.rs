@@ -7,9 +7,9 @@ use gtk::{gdk, prelude::*, subclass::prelude::*};
 use plotters::{
     coord::ranged1d::{AsRangedCoord, DefaultFormatting, Ranged},
     prelude::DrawingBackend,
-    style::{RGBAColor, RGBColor},
+    style::RGBColor,
 };
-use std::{cell::RefCell, convert::TryFrom, ops::Range, rc::Rc};
+use std::{cell::RefCell, convert::TryFrom, ops::Range};
 use time::{macros::format_description, UtcOffset};
 
 #[derive(Debug, Eq, PartialEq, Clone, Copy, glib::GEnum)]
