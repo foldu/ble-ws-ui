@@ -54,6 +54,7 @@ mod imp {
         pub obj: RefCell<Option<SensorObj>>,
         pub live_binding: Cell<Option<SignalHandlerId>>,
         pub bounds: Cell<Option<(u32, u32)>>,
+        pub time_format: Cell<TimeFormat>,
     }
 
     #[glib::object_subclass]
@@ -104,6 +105,7 @@ mod imp {
                         self.unit.get(),
                         self.bounds.get(),
                         bounding_box,
+                        self.time_format.get(),
                     ) {
                         tracing::error!("{}", e);
                     }
@@ -114,10 +116,6 @@ mod imp {
     }
 }
 
-fn to_plotters_color(color: gtk::gdk::RGBA) -> plotters::style::RGBColor {
-    plotters::style::RGBColor(color.red as u8, color.green as u8, color.blue as u8)
-}
-
 fn plot(
     ctx: &gtk::cairo::Context,
     grid_color: RGBColor,
@@ -125,6 +123,7 @@ fn plot(
     unit: Unit,
     bounds: Option<(u32, u32)>,
     bounding_box: (u32, u32),
+    time_format: TimeFormat,
 ) -> Result<(), anyhow::Error> {
     use plotters::prelude::*;
     let root = plotters_cairo::CairoBackend::new(ctx, (bounding_box.0, bounding_box.1))
@@ -167,6 +166,7 @@ fn plot(
                     color: RGBColor(178, 34, 34),
                     formatter: &|temp| Celsius::try_from(*temp as i16).unwrap().to_string(),
                     margin_px: 75,
+                    time_format,
                 },
             )?;
         }
@@ -186,6 +186,7 @@ fn plot(
                             .to_string()
                     },
                     color: RGBColor(106, 90, 205),
+                    time_format,
                 },
             )?;
         }
@@ -204,6 +205,7 @@ fn plot(
                         format!("{}.{:<2}hPa", floating, other)
                     },
                     color: RGBColor(0, 128, 0),
+                    time_format,
                 },
             )?;
         }
@@ -212,10 +214,23 @@ fn plot(
     Ok(())
 }
 
+#[derive(Copy, Clone)]
+pub enum TimeFormat {
+    TimeOnly,
+    DateTime,
+}
+
+impl Default for TimeFormat {
+    fn default() -> Self {
+        TimeFormat::DateTime
+    }
+}
+
 struct FormatSpec<'a, N, C> {
     margin_px: u32,
     formatter: &'a dyn Fn(&N) -> String,
     color: C,
+    time_format: TimeFormat,
 }
 
 fn draw_graph<DB, N, GridColor, GraphColor>(
@@ -251,6 +266,8 @@ where
         .build_cartesian_2d(first..last, min..max)?;
 
     let today = crate::util::now_local().date();
+    let local_offset = UtcOffset::current_local_offset().unwrap();
+
     chart
         .configure_mesh()
         .label_style(&grid_color)
@@ -259,12 +276,17 @@ where
         .x_label_formatter(&|time| {
             let dt = time::OffsetDateTime::from_unix_timestamp(i64::from(*time))
                 .unwrap()
-                .to_offset(UtcOffset::current_local_offset().unwrap());
-            if dt.date() != today {
-                dt.format(&format_description!("[year]-[month]-[day] [hour]:[minute]"))
-                    .unwrap()
-            } else {
-                dt.format(&format_description!("[hour]:[minute]")).unwrap()
+                .to_offset(local_offset);
+            match spec.time_format {
+                TimeFormat::TimeOnly => dt.format(&format_description!("[hour]:[minute]")).unwrap(),
+                TimeFormat::DateTime => {
+                    if dt.date() != today {
+                        dt.format(&format_description!("[year]-[month]-[day] [hour]:[minute]"))
+                            .unwrap()
+                    } else {
+                        dt.format(&format_description!("[hour]:[minute]")).unwrap()
+                    }
+                }
             }
         })
         .y_label_formatter(spec.formatter)
@@ -369,9 +391,11 @@ impl GraphPainter {
                 );
                 self_.live_binding.replace(Some(binding));
                 self_.obj.replace(Some(obj));
+                self_.time_format.set(TimeFormat::TimeOnly);
             }
             Some(Data::Static(timeseries)) => {
                 self_.timeseries.replace(SharedTimeseries::new(timeseries));
+                self_.time_format.set(TimeFormat::DateTime);
             }
             None => {
                 self_.timeseries.replace(SharedTimeseries::empty());
